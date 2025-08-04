@@ -1,0 +1,17 @@
+# Dependency folders
+node_modules
+dist
+
+# Configuration and environment files
+.env
+*.log
+
+# Optional: ignore compiled assets, build scripts, etc.
+build
+coverage
+public
+tmp
+.cache
+
+# Git-related
+.git
