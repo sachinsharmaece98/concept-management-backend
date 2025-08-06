@@ -1,65 +1,67 @@
-import Job from "../models/job"
+import Job from "../models/Job"
+import asyncHandler from "express-async-handler"
 import { Request, Response, NextFunction } from "express"
 
 // @desc Create job
 // @route POST /api/jobs
 // @access private
-export const createJob = async(req: Request, res:Response, next: NextFunction) => {
-    try {
+export const createJob = asyncHandler ( async(req: Request, res:Response, next: NextFunction) => {
+    
         const job = await Job.create(req.body);
         res.status(201).json(job);
-    } catch (err) {
-        next(err);
-    }
-}
+    
+});
 
 // @desc Get jobs
 // @route GET /api/jobs
 // @access public
-export const getJobs = async(req: Request, res: Response, next: NextFunction) => {
-    try {
+export const getJobs = asyncHandler ( async(req: Request, res: Response, next: NextFunction) => {
+    
         const jobs = await Job.find();
-        res.json(jobs);
-    } catch (err) {
-        next(err);
-    }
-};
+        res.status(200).json(jobs);
+    
+});
 
 // @desc Get job by id
 // @route GET /api/jobs/:id
 // @access public
-export const getJobById = async(req: Request, res:Response, next: NextFunction) => {
-    try {
+export const getJobById = asyncHandler ( async(req: Request, res:Response, next: NextFunction) => {
+    
         const job = await Job.findById(req.params.id);
-        if(!job) return res.status(404).json({message: "Job not found"});
-        res.json(job);
-    } catch (err) {
-        next(err);
-    }
-};
+        if(!job) {
+            res.status(404)
+            throw new Error("Job not found");
+        }
+        res.status(200).json(job);
+    
+});
 
 // @desc Update job
 // @route PUT /api/jobs/:id
 // @access private
-export const updateJob = async(req: Request, res: Response, next: NextFunction) => {
-    try {
+export const updateJob = asyncHandler ( async(req: Request, res: Response, next: NextFunction) => {
+    
         const job = await Job.findByIdAndUpdate(req.params.id, req.body, {new: true});
-        if(!job) return res.status(404).json({message: "Job not found"});
-        res.json(job);
-    } catch (err) {
-        next(err);
-    }
-};
+        if(!job) {
+            res.status(404)
+            throw new Error("Job not found");
+        }
+        res.status(200).json({message: "Job updated", job});
+    
+});
 
 // @desc Delete job
 // @route DELETE /api/jobs/:id
 // @access private
-export const deleteJob = async(req: Request, res: Response, next: NextFunction) => {
-    try {
+export const deleteJob = asyncHandler ( async(req: Request, res: Response, next: NextFunction) => {
+    
         const job = await Job.findByIdAndDelete(req.params.id);
-        if(!job) return res.status(404).json({message: "Job not found"});
-    } catch (err) {
-        next(err);
-    }
-};
+        if(!job) {
+            res.status(404)
+            throw new Error("Job not found");
+        }
+
+        res.status(200).json({message: "Job deleted"})
+    
+});
 
