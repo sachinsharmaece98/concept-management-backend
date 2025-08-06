@@ -21,7 +21,15 @@ export const createAdmin = asyncHandler ( async (req: Request, res: Response, ne
     
     const admin = await Admin.create({email, password});
 
-    res.status(201).json({message: "Admin created", admin})
+    // res.status(201).json({message: "Admin created", admin})
+
+    if(admin){
+        res.status(201).json({message: "Admin created ", email: admin.email})
+    }
+    else {
+        res.status(400)
+        throw new Error('Admin data is not valid!');
+    }
     
 });
 
