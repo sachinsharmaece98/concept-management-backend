@@ -7,12 +7,20 @@ import { Request, Response, NextFunction } from "express";
 // @access private
 export const createAdmin = asyncHandler ( async (req: Request, res: Response, next: NextFunction) => {
     
-    const admin = await Admin.create(req.body);
-    const {email, password} = admin;
+    const {email, password} = req.body;
     if(!email || !password) {
         res.status(400);
         throw new Error('All fields are required !')
     }
+    
+    const adminExists  = await Admin.findOne({email});
+    if(adminExists) {
+        res.status(400)
+        throw new Error('Admin already registered!')
+    }
+    
+    const admin = await Admin.create({email, password});
+
     res.status(201).json({message: "Admin created", admin})
     
 });
