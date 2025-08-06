@@ -2,7 +2,7 @@ import Admin from "../models/Admin";
 import asyncHandler from "express-async-handler";
 import { Request, Response, NextFunction } from "express";
 
-// @desc Create job
+// @desc Create admin
 // @route POST /api/admin
 // @access private
 export const createAdmin = asyncHandler ( async (req: Request, res: Response, next: NextFunction) => {
@@ -17,7 +17,7 @@ export const createAdmin = asyncHandler ( async (req: Request, res: Response, ne
     
 });
 
-// @desc Create job
+// @desc Get admin
 // @route GET /api/admin
 // @access private
 export const getAdmins = asyncHandler ( async (req: Request, res: Response, next: NextFunction) => {
@@ -27,7 +27,7 @@ export const getAdmins = asyncHandler ( async (req: Request, res: Response, next
     
 });
 
-// @desc Create job
+// @desc Update admin
 // @route PUT /api/admin
 // @access private
 export const updateAdmin = asyncHandler ( async (req: Request, res: Response, next: NextFunction) => {
@@ -41,7 +41,7 @@ export const updateAdmin = asyncHandler ( async (req: Request, res: Response, ne
     
 });
 
-// @desc Create job
+// @desc Delete admin
 // @route DELETE /api/admin
 // @access private
 export const deleteAdmin = asyncHandler ( async (req: Request, res: Response, next: NextFunction) => {
