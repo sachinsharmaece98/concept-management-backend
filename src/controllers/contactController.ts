@@ -31,15 +31,46 @@ export const contactUs = asyncHandler ( async (req: Request, res: Response) => {
         to: process.env.ADMIN_EMAIL,
         replyTo: email,
         subject: `Message from ${firstName} with subject : ${subject}`,
-        text: `
-            User Type: ${userType}
-            Name: ${firstName} ${lastName}
-            Email: ${email}
-            Phone: ${phone}
-            Company: ${company}
-            Service of Interest: ${serviceOfInterest}
-            Message: ${message}
+        html: `
+            <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+                <h2 style="color: #007BFF;">📩 New Contact Form Submission</h2>
+                <hr style="border: 0; border-top: 2px solid #eee; margin: 20px 0;">
+                <table cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td><strong>👤 User Type:</strong></td>
+                    <td>${userType}</td>
+                </tr>
+                <tr>
+                    <td><strong>👥 Name:</strong></td>
+                    <td>${firstName} ${lastName}</td>
+                </tr>
+                <tr>
+                    <td><strong>📧 Email:</strong></td>
+                    <td>${email}</td>
+                </tr>
+                <tr>
+                    <td><strong>📞 Phone:</strong></td>
+                    <td>${phone}</td>
+                </tr>
+                <tr>
+                    <td><strong>🏢 Company:</strong></td>
+                    <td>${company}</td>
+                </tr>
+                <tr>
+                    <td><strong>🛠️ Service of Interest:</strong></td>
+                    <td>${serviceOfInterest}</td>
+                </tr>
+                </table>
+                <div style="margin-top: 20px;">
+                <h3 style="margin-bottom: 10px;">📝 Message:</h3>
+                <blockquote style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #ccc;">
+                    ${message}
+                </blockquote>
+                </div>
+                <p style="color: #888; margin-top: 30px;">📅 Submitted on: <strong>${new Date().toLocaleString()}</strong></p>
+            </div>
             `,
+
         attachments: file ? [{ filename: file.originalname, content: file.buffer}] : [],
     });
     
