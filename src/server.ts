@@ -5,6 +5,7 @@ import jobRoutes from "./routes/jobRoutes";
 import adminRoutes from "./routes/adminRoutes";
 import authRoutes from "./routes/authRoutes";
 import contactRoutes from "./routes/contactRoutes";
+import applyJobRoute from "./routes/applyJobRoutes";
 import errorHandler from "./middlewares/errorHandler";
 
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(errorHandler);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/admin', adminRoutes, authRoutes);
 app.use('/api/contactUs', contactRoutes);
+app.use('/api/applyJob', applyJobRoute);
 
 app.get("/", (req: Request, res: Response) => {
     res.send("server is running fine")
