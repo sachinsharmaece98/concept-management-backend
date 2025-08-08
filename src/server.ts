@@ -1,5 +1,5 @@
-import express, {type Request, type Response} from "express";
-import dotenv from 'dotenv';
+import express, { type Request, type Response } from "express";
+import dotenv from "dotenv";
 import connectDB from "./config/db";
 import jobRoutes from "./routes/jobRoutes";
 import adminRoutes from "./routes/adminRoutes";
@@ -17,13 +17,14 @@ connectDB();
 app.use(express.json());
 app.use(errorHandler);
 
-app.use('/api/jobs', jobRoutes);
-app.use('/api/admin', adminRoutes, authRoutes);
-app.use('/api/contactUs', contactRoutes);
-app.use('/api/applyJob', applyJobRoute);
+app.use("/api/jobs", jobRoutes);
+app.use("/api/admin", adminRoutes, authRoutes);
+app.use("/api/contactUs", contactRoutes);
+app.use("/api/applyJob", applyJobRoute);
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("server is running fine")
-})
+  const now = new Date();
+  res.send(`server is running fine: ${now.toISOString()}`);
+});
 
 export default app;
