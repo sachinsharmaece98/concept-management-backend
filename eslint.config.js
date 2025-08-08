@@ -1,5 +1,6 @@
 import parser from "@typescript-eslint/parser";
-import plugin from "@typescript-eslint/eslint-plugin";
+import ts from "@typescript-eslint/eslint-plugin";
+import js from "@eslint/js";
 import prettier from "eslint-plugin-prettier";
 
 export default [
@@ -8,22 +9,27 @@ export default [
     languageOptions: {
       parser,
       parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-      },
-      globals: {
-        node: true,
-        es2021: true,
+        project: "./tsconfig.json",
       },
     },
     plugins: {
-      "@typescript-eslint": plugin,
+      "@typescript-eslint": ts,
       prettier,
     },
     rules: {
+      ...ts.configs.recommended.rules,
       "prettier/prettier": "error",
       "no-console": "off",
-      "@typescript-eslint/no-unused-vars": ["warn"],
+    },
+  },
+  {
+    files: ["**/*.js"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+    },
+    rules: {
+      ...js.configs.recommended.rules,
     },
   },
 ];
