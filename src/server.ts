@@ -22,6 +22,7 @@ app.use("/api/admin", adminRoutes, authRoutes);
 app.use("/api/contactUs", contactRoutes);
 app.use("/api/applyJob", applyJobRoute);
 
+// to check server status
 app.get("/", (req: Request, res: Response) => {
   const now = new Date();
   res.send(`server is running fine: ${now.toISOString()}`);
