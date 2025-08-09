@@ -7,10 +7,23 @@ import authRoutes from "./routes/authRoutes";
 import contactRoutes from "./routes/contactRoutes";
 import applyJobRoute from "./routes/applyJobRoutes";
 import errorHandler from "./middlewares/errorHandler";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
+
+// ✅ Allow all origins (safe for keep-alive public API)
+app.use(cors());
+
+// Or, if you want to specify:
+app.use(
+  cors({
+    origin: "*", // Allow all origins
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 
 connectDB();
 
