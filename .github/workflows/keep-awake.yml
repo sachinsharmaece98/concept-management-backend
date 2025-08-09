@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Render server
-        run: curl -s https://concept-management-backend.onrender.com/
+        run: curl -s https://conceptmanagement-nextjs.vercel.app/keep-alive
