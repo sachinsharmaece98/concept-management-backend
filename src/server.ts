@@ -28,6 +28,7 @@ app.use(
 connectDB();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(errorHandler);
 
 app.use("/api/jobs", jobRoutes);
